@@ -1,0 +1,7 @@
+#posts-list {
+  border-bottom: 1px solid black;
+}
+
+#posts-list > ol {
+  text-align: left;
+}

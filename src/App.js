@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import CreatePostSection from "./components/CreatePostSection/CreatePostSection";
+import EditPostSection from "./components/EditPostSection";
+import Header from "./components/Header";
+import PostsList from "./components/PostsList/PostsList";
+
+const initialPosts = [
+  { title: "샘플 포스트 제목", content: "샘플 포스트 내용" },
+];
 
 function App() {
+  const [posts, setPosts] = useState(initialPosts);
+  const [postIndexToEdit, setPostIndexToEdit] = useState(null); // "create" | "edit"
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <button onClick={() => setPostIndexToEdit(null)}>
+        새로운 포스트 작성하기
+      </button>
+
+      <PostsList posts={posts} setPostIndexToEdit={setPostIndexToEdit} />
+
+      {/* 포스트 작성하기 */}
+      {postIndexToEdit === null && <CreatePostSection setPosts={setPosts} />}
+
+      {/* 포스트 수정하기 */}
+      {postIndexToEdit !== null && (
+        <EditPostSection
+          posts={posts}
+          setPosts={setPosts}
+          postIndexToEdit={postIndexToEdit}
+        />
+      )}
     </div>
   );
 }

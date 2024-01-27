@@ -6,7 +6,7 @@ function PostEditor({ buttonLabel, onClickButton, postToEdit }) {
   const [content, setContent] = useState(postToEdit ? postToEdit.content : "");
 
   const handleClickButton = () => {
-    onClickButton({ title, content });
+    onClickButton({ title, content, postToEdit });
 
     setTitle("");
     setContent("");

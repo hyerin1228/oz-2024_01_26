@@ -15,10 +15,11 @@ function EditPostSection({ posts, setPosts, postIndexToEdit }) {
     // postToEdit 가 있으면 바꿔서 새로 넣어줘야하고. 없으면 그냥 데이터 넣어도 되고.
 
     // 일단 새로운 걸 만든다.
+    // postToEdit이 App.js 의 posts 안에 있는 거란 걸 어떻게 확인해야될지 모르겠네.. 들어있는 값은 우선 같긴한데.. 
     if(postToEdit === null){
       setPosts((prevPosts) => [...prevPosts, { title, content }]);
     }else{
-      let updatedPosts = [...posts].map( function(post){
+      let updatedPosts = posts.map( function(post){
         return (post === postToEdit) ? { title,content } : post;
       });
       setPosts(updatedPosts);

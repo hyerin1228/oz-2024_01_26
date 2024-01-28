@@ -4,32 +4,32 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 
 
-// a little function to help us with reordering the result(결과 재정렬을 돕는 함수)
-const reorder =  (list, startIndex, endIndex) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-
-  return result;
-};
-
-const grid = 8;
-const getItemStyle = (draggableStyle, isDragging) => ({
-  userSelect: 'none',
-  padding: grid * 2,
-  marginBottom: grid,
-  background: isDragging ? 'lightgreen' : 'grey',
-  ...draggableStyle
-});
-
-const getListStyle = (isDraggingOver) => ({
-  background: isDraggingOver ? 'lightblue' : 'lightgrey',
-  padding: grid,
-  width: 250
-});
-
-
 function PostsList({ posts, setPostIndexToEdit, setPosts }) {
+    // a little function to help us with reordering the result(결과 재정렬을 돕는 함수)
+  const reorder =  (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+  };
+
+  const grid = 8;
+  const getItemStyle = (draggableStyle, isDragging) => ({
+    userSelect: 'none',
+    padding: grid * 2,
+    marginBottom: grid,
+    background: isDragging ? 'lightgreen' : 'grey',
+    ...draggableStyle
+  });
+
+  const getListStyle = (isDraggingOver) => ({
+    background: isDraggingOver ? 'lightblue' : 'lightgrey',
+    padding: grid,
+    width: 250
+  });
+
+  console.log(posts)
 
   const onDragEnd = (result) => {
     if (!result.destination) {
@@ -42,7 +42,11 @@ function PostsList({ posts, setPostIndexToEdit, setPosts }) {
       result.destination.index
     );
 
+    console.log(newItems);
+    console.log(posts);
     setPosts(newItems);
+    //setPosts((prevPosts) => [...prevPosts, newItems]);
+    console.log(posts);
   };
 
   return (
@@ -55,45 +59,45 @@ function PostsList({ posts, setPostIndexToEdit, setPosts }) {
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
             >
-              {posts.map((post, index) => (
-                <Draggable
-                  key={post.title}
-                  draggableId={post.title}
-                  index={index}
-                >
-                  {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      style={getItemStyle(
-                        provided.draggableStyle,
-                        snapshot.isDragging
-                      )}
-                      {...provided.dragHandleProps}
-                    >
-                      {/*  */}
-                      {posts.map((post, index) => (
-                      <li key={post.title}>
-                        <span>{post.title}</span>
-                        <button onClick={() => setPostIndexToEdit(index)}>수정하기</button>
-                      </li>
-                      ))}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
+              <ol>
+                {posts.map((post, index) => (
+                  <Draggable
+                    key={post.title}
+                    draggableId={post.title}
+                    index={index}
+                  >
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        style={getItemStyle(
+                          provided.draggableStyle,
+                          snapshot.isDragging
+                        )}
+                        {...provided.dragHandleProps}
+                      >
+                        {/*  */}
+                        <li key={post.title}>
+                          <span>{post.title}</span>
+                          <button onClick={() => setPostIndexToEdit(index)}>수정하기</button>
+                        </li>
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+              </ol>
               {provided.placeholder}
             </div>
           )}
         </Droppable>
       </DragDropContext>
-      <ol>
+      {/* <ol>
         {posts.map((post, index) => (
           <li key={post.title}>
             <span>{post.title}</span>
             <button onClick={() => setPostIndexToEdit(index)}>수정하기</button>
           </li>
         ))}
-      </ol>
+      </ol> */}
     </section>
   );
 }

@@ -23,7 +23,7 @@ function App() {
       <PostsList posts={posts} setPosts={setPosts} setPostIndexToEdit={setPostIndexToEdit} />
 
       {/* 포스트 작성하기 */}
-      {postIndexToEdit === null && <CreatePostSection setPosts={setPosts} />}
+      {postIndexToEdit === null && <CreatePostSection posts={posts} setPosts={setPosts} />}
 
       {/* 포스트 수정하기 */}
       {postIndexToEdit !== null && (

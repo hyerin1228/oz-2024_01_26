@@ -3,7 +3,7 @@ import PostEditor from "../PostEditor";
 
 function CreatePostSection({ setPosts }) {
   const handleClickButton = ({ title, content }) => {
-    setPosts((prevPosts) => [...prevPosts, { title, content }]);
+    setPosts((prevPosts) => [...prevPosts, { id: crypto.randomUUID(), title, content }]);
   };
 
   return (

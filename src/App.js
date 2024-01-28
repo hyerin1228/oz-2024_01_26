@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import PostsList from "./components/PostsList/PostsList";
 
 const initialPosts = [
-  { title: "샘플 포스트 제목", content: "샘플 포스트 내용" },
+  { id: "1", title: "샘플 포스트 제목", content: "샘플 포스트 내용" },
 ];
 
 function App() {

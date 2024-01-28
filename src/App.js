@@ -20,7 +20,7 @@ function App() {
         새로운 포스트 작성하기
       </button>
 
-      <PostsList posts={posts} setPostIndexToEdit={setPostIndexToEdit} />
+      <PostsList posts={posts} setPosts={setPosts} setPostIndexToEdit={setPostIndexToEdit} />
 
       {/* 포스트 작성하기 */}
       {postIndexToEdit === null && <CreatePostSection setPosts={setPosts} />}
